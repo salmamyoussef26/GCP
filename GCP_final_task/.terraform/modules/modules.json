@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"vpc","Source":"./vpc","Dir":"vpc"},{"Key":"vm","Source":"./vm","Dir":"vm"},{"Key":"nat","Source":"./nat_gateway","Dir":"nat_gateway"},{"Key":"subnet","Source":"./subnet","Dir":"subnet"},{"Key":"","Source":"","Dir":"."},{"Key":"sa","Source":"./service_account","Dir":"service_account"},{"Key":"provider","Source":"./provider","Dir":"provider"}]}
