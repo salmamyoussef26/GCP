@@ -31,7 +31,7 @@ module "subnet"{
     source = "./subnet"
 
     subnet-network = module.vpc.vpc-name
-   // project = "salma-youssef-project"
+    google_apis_access = true
     
     //management subnet
     manag-subnet-name =  "management-subnet"
@@ -42,6 +42,7 @@ module "subnet"{
     restricted-subnet-name = "restricted-subnet"
     restricted-subnet-cidr = "10.0.1.0/24"
     restricted-subnet-region = "us-east4"
+
 
 }
 
@@ -62,14 +63,29 @@ module "vm"{
 module "nat"{
     source = "./nat_gateway"
 
+    //router
     router_name = "nat-router"
     router_region = module.subnet.manag_region_name
     router_network = module.vpc.vpc-id
 
+    //nat
     nat_name = "my-nat"
     nat_router = module.nat.router_name
     nat_region = module.nat.router_region
     ip_allocation = "AUTO_ONLY"
-    source_subnetwork = "ALL_SUBNETWORKS_ALL_IP_RANGES"
+    source_subnetwork = "LIST_OF_SUBNETWORKS"
+    subnet_name = module.subnet.manag_subnet_name
+    ip_ranges = ["ALL_IP_RANGES"]
     
+}
+
+module "firewall" {
+    source = "./firewall"
+
+    firewall_name = "allow-ssh-using-iap"
+    vpc_name = module.vpc.vpc-name
+    protocol = "tcp"
+    ports = ["22"]
+    vms_to_be_accessed = ["private-vm"]
+    iap-ip = ["35.235.240.0/20"]
 }

@@ -30,3 +30,4 @@ variable "restricted-subnet-cidr"{
 variable "restricted-subnet-region"{
     type = string
 }
+variable "google_apis_access"{}

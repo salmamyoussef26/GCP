@@ -6,3 +6,5 @@ variable "nat_router"{}
 variable "nat_region"{}
 variable "ip_allocation"{}
 variable "source_subnetwork"{}
+variable "subnet_name"{}
+variable "ip_ranges"{}

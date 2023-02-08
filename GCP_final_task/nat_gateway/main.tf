@@ -14,5 +14,9 @@ resource "google_compute_router_nat" "nat" {
   region                             = var.nat_region
   nat_ip_allocate_option             = var.ip_allocation
   source_subnetwork_ip_ranges_to_nat = var.source_subnetwork
-
+  
+  subnetwork {
+    name = var.subnet_name
+    source_ip_ranges_to_nat = var.ip_ranges 
+  }
 }
