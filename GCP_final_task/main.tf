@@ -89,3 +89,33 @@ module "firewall" {
     vms_to_be_accessed = ["private-vm"]
     iap-ip = ["35.235.240.0/20"]
 }
+
+module "gke"{
+    source = "./gke"
+
+    cluster_name = "private-cluster"
+    cluster_location = "us-east4-a"
+    node_pool = true
+    node_count = 1
+    cluster_network = module.vpc.vpc-name
+    cluster_subnet = module.subnet.restricted_subnet_name 
+
+    //private cluster config
+    enable_private_endpoint = true
+    enable_private_nodes = true
+    master_ip = "172.16.0.0/28"
+
+    //authorized network to access the management cluster
+    manag-subnet-cidr = module.subnet.manag-subnet-cidr
+    manag-subnet-name = module.subnet.manag_subnet_name
+
+    //node pool
+    node_pool_name = "private-node-pool"
+    node_pool_location = "us-east4-a"
+    node_pool_cluster = module.gke.cluster_id
+    node_pool_count = 1
+    node_machine_type = "g1-small"
+
+    sa-email = module.sa.sa-email
+
+}
