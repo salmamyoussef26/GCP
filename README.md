@@ -11,7 +11,7 @@
 3. Docker.
 4. K8s.
 --------------------------------------
-**1. Build GCP infrastructure using Terraform:**
+**Build GCP infrastructure using Terraform:**
 ```
 .
 ├── firewall
@@ -47,15 +47,37 @@
     ├── output.tf
     └── variables.tf
 ```
+
+- Create Infrastructure
+```
+terraform init
+terraform plan
+terraform apply
+```
 -------------------------------------------
-**2. Dockerfile:**
+**Dockerfile:**
+
+**1. Clone the project:**
+```
+git clone https://github.com/salmarefaie/final-task-gcp.git
+```
+**2. Create the Dockerfile in the project folder**
+
+
+
+
+
+
 
 ![Screenshot from 2023-02-13 01-17-06](https://user-images.githubusercontent.com/110994084/218343229-3f0a7253-d05b-4f35-b5d3-fb7ef37ca5e4.png)
 
-Build and Push the image to GCR:
+
+---------------------------------
+
+**3. Build and Push the image to GCR:**
 ```
-docker build -t final_task_app .
-docker tag final_task_app gcr.io/salma-youssef-project/gcr_python_app:1.0
-docker push gcr.io/salma-youssef-project/gcr_python_app:1.0
+docker build -t final_task_app_img .
+docker tag final_task_app_img gcr.io/salma-youssef-project/gcr_python_app_img:1.0
+docker push gcr.io/salma-youssef-project/gcr_python_app_img:1.0
 
 ```
